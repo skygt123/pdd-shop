@@ -1,7 +1,7 @@
 # pdd
 
 ```
-cd pdd-shop 测试
+cd pdd-shop
 ```
 
 ## Project setup
