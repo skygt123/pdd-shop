@@ -1,5 +1,9 @@
 # pdd
 
+```
+cd pdd-shop
+```
+
 ## Project setup
 
 ```
