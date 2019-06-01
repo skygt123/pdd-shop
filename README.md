@@ -1,5 +1,9 @@
 # pdd
 
+```
+cd pdd
+```
+
 ## Project setup
 
 ```
