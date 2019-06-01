@@ -24,18 +24,18 @@
         </cube-slide-item>
       </cube-slide> -->
 
-      <cube-slide 
-        :loop="loop" 
+      <cube-slide
+        :loop="loop"
         :auto-play="autoPlay"
-        ref="slide" 
-        :data="tabLabels" 
+        ref="slide"
+        :data="tabLabels"
         @change="changePageTop"
       >
         <cube-slide-item v-for="(tabLabel, index) in tabLabels" :key="index" @click.native="clickHandlerTop(item, index)" style="background:red;">
           {{tabLabel.label}}
         </cube-slide-item>
       </cube-slide>
-      
+
       <div class="tab-slide-container">
         <!-- <cube-slide
           ref="slide"
@@ -58,8 +58,8 @@
                   <div>111</div>
                 </li>
               </ul>
-             
-            </cube-scroll> 
+
+            </cube-scroll>
           </cube-slide-item>
         </cube-slide> -->
       </div>
@@ -67,127 +67,126 @@
     </cube-page>
 
   </div>
-  
+
 </template>
 
 <script type="text/ecmascript-6">
-  import CubePage from 'components/cube-page.vue'
-  export default {
-    data () {
-      return {
-        selectedLabel: '热门',
-        disabled: false,
-        tabLabels: [{
-          label: '热门'
-        }, {
-          label: '服饰'
-        }, {
-          label: '鞋包'
-        }, {
-          label: '母婴'
-        }
-        , {
-          label: '百货'
-        }
-        , {
-          label: '百货一'
-        }
-        , {
-          label: '百货二'
-        }
-        , {
-          label: '百货三'
-        }
-        , {
-          label: '百货四'
-        }, {
-          label: '百货五'
-        }, {
-          label: '百货六'
-        }, {
-          label: '百货七'
-        }, {
-          label: '百货八'
-        }
-        ],
-        loop: false,
-        autoPlay: false,
-        showDots: false,
-        slideOptions: {
-          listenScroll: true,
-          probeType: 3,
-          /* lock y-direction when scrolling horizontally and  vertically at the same time */
-          directionLockThreshold: 0
-        },
-        scrollOptions: {
-          /* lock x-direction when scrolling horizontally and  vertically at the same time */
-          directionLockThreshold: 0
-        },
-        // followersData: FOLLOWERS_DATA,
-        // recommendData: RECOMMEND_DATA,
-        // hotData: HOT_DATA
+import CubePage from 'components/cube-page.vue'
+export default {
+  data () {
+    return {
+      selectedLabel: '热门',
+      disabled: false,
+      tabLabels: [{
+        label: '热门'
+      }, {
+        label: '服饰'
+      }, {
+        label: '鞋包'
+      }, {
+        label: '母婴'
+      },
+      {
+        label: '百货'
+      },
+      {
+        label: '百货一'
+      },
+      {
+        label: '百货二'
+      },
+      {
+        label: '百货三'
+      },
+      {
+        label: '百货四'
+      }, {
+        label: '百货五'
+      }, {
+        label: '百货六'
+      }, {
+        label: '百货七'
+      }, {
+        label: '百货八'
       }
-    },
-    methods: {
-      changePageTop(current) {
+      ],
+      loop: false,
+      autoPlay: false,
+      showDots: false,
+      slideOptions: {
+        listenScroll: true,
+        probeType: 3,
+        /* lock y-direction when scrolling horizontally and  vertically at the same time */
+        directionLockThreshold: 0
+      },
+      scrollOptions: {
+        /* lock x-direction when scrolling horizontally and  vertically at the same time */
+        directionLockThreshold: 0
+      }
+      // followersData: FOLLOWERS_DATA,
+      // recommendData: RECOMMEND_DATA,
+      // hotData: HOT_DATA
+    }
+  },
+  methods: {
+    changePageTop (current) {
       console.log('当前轮播图序号为:' + current)
     },
-    clickHandlerTop(item, index) {
+    clickHandlerTop (item, index) {
       console.log(item, index)
     },
 
-      changePage (current) {
-        this.selectedLabel = this.tabLabels[current].label
-        console.log(current)
-      },
-      scroll (pos) {
-        const x = Math.abs(pos.x)
-        const tabItemWidth = this.$refs.tabNav.$el.clientWidth
-        const slideScrollerWidth = this.$refs.slide.slide.scrollerWidth
-        const deltaX = x / slideScrollerWidth * tabItemWidth
-        this.$refs.tabNav.setSliderTransform(deltaX)
-      },
-      clickHandler (current) {
-        // if you clicked home tab, then print 'Home'
-        console.log(current)
-      },
-      findIndex(ary, fn) {
-        if (ary.findIndex) {
-          return ary.findIndex(fn)
+    changePage (current) {
+      this.selectedLabel = this.tabLabels[current].label
+      console.log(current)
+    },
+    scroll (pos) {
+      const x = Math.abs(pos.x)
+      const tabItemWidth = this.$refs.tabNav.$el.clientWidth
+      const slideScrollerWidth = this.$refs.slide.slide.scrollerWidth
+      const deltaX = x / slideScrollerWidth * tabItemWidth
+      this.$refs.tabNav.setSliderTransform(deltaX)
+    },
+    clickHandler (current) {
+      // if you clicked home tab, then print 'Home'
+      console.log(current)
+    },
+    findIndex (ary, fn) {
+      if (ary.findIndex) {
+        return ary.findIndex(fn)
+      }
+      /* istanbul ignore next */
+      let index = -1
+      /* istanbul ignore next */
+      ary.some(function (item, i, ary) {
+        const ret = fn.call(this, item, i, ary)
+        if (ret) {
+          index = i
+          return ret
         }
-        /* istanbul ignore next */
-        let index = -1
-        /* istanbul ignore next */
-        ary.some(function (item, i, ary) {
-          const ret = fn.call(this, item, i, ary)
-          if (ret) {
-            index = i
-            return ret
-          }
       })
       /* istanbul ignore next */
       return index
     }
-    },
-    computed: {
-      initialIndex () {
-        let index = 0
-        index = this.findIndex(this.tabLabels, item => item.label === this.selectedLabel)
-        console.log("index"+index)
-        return index
-      }
-    },
-    components: {
-      CubePage
+  },
+  computed: {
+    initialIndex () {
+      let index = 0
+      index = this.findIndex(this.tabLabels, item => item.label === this.selectedLabel)
+      console.log('index' + index)
+      return index
     }
+  },
+  components: {
+    CubePage
   }
+}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   /* 覆盖样式 */
   .side-container
     .cube-scroll-nav-bar-item
       width 100%
-
 
   .cube-page
     &.tab-composite-view
