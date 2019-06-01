@@ -34,9 +34,7 @@ module.exports = {
     loaderOptions: {
       stylus: {
         'resolve url': true,
-        'import': [
-          './src/theme'
-        ]
+        import: ['./src/theme']
       }
     }
   },

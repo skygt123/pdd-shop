@@ -26,48 +26,57 @@ export default new Router({
             showBottomTabBar: true,
             requireAuth: true // 判断是否需要登录
           }
-        }, {
+        },
+        {
           path: 'dress',
           meta: {
             showBottomTabBar: true,
             requireAuth: true // 判断是否需要登录
           },
           component: () => import('components/Children/Dress')
-        }, {
+        },
+        {
           path: 'ele',
           meta: {
             showBottomTabBar: true,
             requireAuth: true // 判断是否需要登录
           },
           component: () => import('components/Children/Ele')
-        }, {
+        },
+        {
           path: 'food',
           meta: { showBottomTabBar: true },
           component: () => import('components/Children/Food')
-        }, {
+        },
+        {
           path: 'general',
           meta: { showBottomTabBar: true },
           component: () => import('components/Children/General')
-        }, {
+        },
+        {
           path: 'hot',
           meta: {
             showBottomTabBar: true,
             requireAuth: true // 判断是否需要登录
           },
           component: () => import('components/Children/Hot/Hot')
-        }, {
+        },
+        {
           path: 'man',
           meta: { showBottomTabBar: true },
           component: () => import('components/Children/Man')
-        }, {
+        },
+        {
           path: 'mbaby',
           meta: { showBottomTabBar: true },
           component: () => import('components/Children/Mbaby')
-        }, {
+        },
+        {
           path: 'shirt',
           meta: { showBottomTabBar: true },
           component: () => import('components/Children/Shirt')
-        }, {
+        },
+        {
           path: '/',
           redirect: '/home/hot',
           meta: { showBottomTabBar: true }
@@ -82,6 +91,15 @@ export default new Router({
         requireAuth: true // 判断是否需要登录
       },
       component: () => import('views/Recommend/Recommend')
+    },
+    {
+      path: '/shopdetail',
+      name: 'shopdetail',
+      meta: {
+        showBottomTabBar: false,
+        requireAuth: true // 判断是否需要登录
+      },
+      component: () => import('views/ShopDetail/ShopDetail')
     },
     // {
     //   path: '/home1',
@@ -114,15 +132,6 @@ export default new Router({
         requireAuth: true // 判断是否需要登录
       },
       component: () => import('views/Search/Search2')
-    },
-    {
-      path: '/1',
-      name: '1',
-      meta: {
-        showBottomTabBar: true,
-        requireAuth: true // 判断是否需要登录
-      },
-      component: () => import('views/Search/1')
     },
     {
       path: '/chat',

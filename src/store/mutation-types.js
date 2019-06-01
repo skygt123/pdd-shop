@@ -5,3 +5,6 @@ export const RECOMMEND_SHOP_LIST = 'recommend_shop_list' // 推荐商品列表
 export const SEARCH_GOODS = 'search_goods' // 搜索商品列表
 export const USER_INFO = 'user_info' // 用户信息
 export const RESET_USER_INFO = 'reset_user_info' // 用户信息
+export const CART_SHOP_INFO = 'cart_shop_info' // 购物车商品信息
+export const CART_SHOP_ADD = 'cart_shop_add' // 购物车商品信息
+export const CART_SHOP_UPDATE = 'cart_shop_undate' // 购物车商品信息

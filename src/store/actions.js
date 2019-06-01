@@ -14,7 +14,10 @@ import {
   RECOMMEND_SHOP_LIST,
   SEARCH_GOODS,
   USER_INFO,
-  RESET_USER_INFO
+  RESET_USER_INFO,
+  CART_SHOP_INFO,
+  // CART_SHOP_ADD,
+  CART_SHOP_UPDATE
 } from './mutation-types'
 export default {
   // 首页轮播数据homecasual
@@ -39,7 +42,7 @@ export default {
     if (result.message.length === '') {
       return
     }
-    console.log(result.message)
+    // console.log(result.message)
     commit(RECOMMEND_SHOP_LIST, { recommendshoplist: result.message })
   },
   // 首页商品列表数据searchgoods
@@ -70,6 +73,21 @@ export default {
       commit(RESET_USER_INFO)
       window.localStorage.setItem('loginType', '')
     }
+  },
+  // 添加数据到购物车
+  addCartShop ({ commit }, cartInfo) {
+    console.log(cartInfo)
+    commit(CART_SHOP_INFO, { cartInfo: cartInfo })
+  },
+  // 添加数据增加
+  // cartShopAdd ({ commit }, cartInfo) {
+  //   // console.log(cartInfo)
+  //   commit(CART_SHOP_ADD, { cartInfo: cartInfo })
+  // },
+  // increment (context) {
+  //   context.commit('increment')
+  // },
+  updateGoodsNumber ({ commit }, cartshopnumber) {
+    commit(CART_SHOP_UPDATE, { cartshopnumber: cartshopnumber })
   }
-
 }

@@ -13,7 +13,12 @@ export const getHomeNav = () => fetch(BASE_URL + '/api/homenav')
 export const getHomeShopList = () => fetch(BASE_URL + '/api/homeshoplist')
 
 // 推荐商品列表
-export const getRecommendShopList = (params) => fetch(BASE_URL + '/api/recommendshoplist', params)
+export const getRecommendShopList = params =>
+  fetch(BASE_URL + '/api/recommendshoplist', params)
+
+// 商品详情
+export const getShopDetail = params =>
+  fetch(BASE_URL + '/api/shopdetail', params)
 
 // 推荐商品列表拼单用户/api/recommenduser
 export const getRecommendUser = () => fetch(BASE_URL + '/api/recommenduser')
@@ -25,11 +30,14 @@ export const getSearchGoods = () => fetch(BASE_URL + '/api/searchgoods')
 export const getCaptcha = () => fetch(BASE_URL + '/api/captcha')
 
 // 发送验证码短信 /api/send_code
-export const getPhoneCode = (phone) => fetch(BASE_URL + '/api/send_code', { phone })
+export const getPhoneCode = phone =>
+  fetch(BASE_URL + '/api/send_code', { phone })
 // 手机验证码登录 /api/login_code
-export const getLoginCode = (phone, code) => fetch(BASE_URL + '/api/login_code', { phone, code }, 'POST')
+export const getLoginCode = (phone, code) =>
+  fetch(BASE_URL + '/api/login_code', { phone, code }, 'POST')
 // 用户名和密码登录 '/api/login_pwd'
-export const getLoginPwd = (name, pwd, captcha) => fetch(BASE_URL + '/api/login_pwd', { name, pwd, captcha }, 'POST')
+export const getLoginPwd = (name, pwd, captcha) =>
+  fetch(BASE_URL + '/api/login_pwd', { name, pwd, captcha }, 'POST')
 // 根据session中的用户id获取用户信息 /api/user_info
 export const getUserInfo = () => fetch(BASE_URL + '/api/user_info')
 // 退出登录 /api/logout

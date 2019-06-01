@@ -40,8 +40,7 @@
           </div>
           <div class="price">售价：{{ item.price/100 }}元</div>
           <div class="number">
-            <div><button @click="changeNumber(item.goods_id,-1)">-</button> {{item.goods_number}} <button @click="changeNumber(item.goods_id,1)">+</button>
-              <!-- <div><button @click="changeNumber(item.goods_id,-1)">-</button> {{item.goods_number}} <button @click="changeNumber(item.goods_id,1)">+</button> -->
+            <div><button @click="insert(index)">-</button> {{item.goods_number}} <button @click="add(index)">+</button>
             </div>
           </div>
         </div>
@@ -79,18 +78,32 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       isAllChecked: false,
+      selectType: true,
       check_goods: [] // 已选择的商品,
     }
   },
   methods: {
     checkedAll () { // 全选
       // console.log(this.isAllChecked)
+      // debugger
       this.isAllChecked = !this.isAllChecked
+      // if (this.selectType) { // 设置全选
+      //   this.check_goods = [] // 置空否则数组有重复
+      //   this.cartArr.forEach((item, k) => {
+      //     this.check_goods.push(item.goods_id)
+      //   })
+      //   console.log(this.selectType)
+      //   this.selectType = false
+      // } else { // 设置全不选
+      //   this.check_goods = []
+      //   console.log(this.selectType)
+      //   this.selectType = true
+      // }
       if (event.currentTarget.checked) { // 全选
         this.check_goods = [] // 置空否则数组有重复
         this.cartArr.forEach((item, k) => {
@@ -112,45 +125,34 @@ export default {
           return item !== this.cartArr[k].goods_id
         })
       }
+      // console.log(k.checked)
+      // if (typeof item.checked === 'undefined') {
+      //   console.log('单选')
+      //   this.$set(item, 'checked', true)
+      //   this.check_goods.push(this.cartArr[k].goods_id)
+      // } else {
+      //   console.log('取消单选')
+      //   item.checked = !item.checked
+      //   this.check_goods = this.check_goods.filter(item => {
+      //     return item !== this.cartArr[k].goods_id
+      //   })
+      // }
       console.log(this.check_goods)
     },
-    changeNumber (id, val) {
-      // this.$store.commit('cartadd',index)
-      // console.log(id)
-      // console.log(val)
-      // var i = this.findPosition(id)
-      // var number = this.check_goods[i].goods_number
-      // console.log(`i:${i}`)
-      // ,number:${number}
-      this.updateGoodsNumber({
-        goods_id: id,
-        index: val
-      })
-      // this.$store.commit('updateGoodsNumber', {
-      //   goods_id: id,
-      //   index: val // 判断类型 1 +, -1 -
-      //   // value: number + val <= 0 ? 1 : number + val
-      // })
+    add (index) {
+      // console.log(this.cartArr[k])
+      this.cartArr[index].goods_number++
     },
-    findPosition (id) {
-      return this.check_goods.findIndex(item => {
-        return item.goods_id === id
-      })
+    insert (index) {
+      if (this.cartArr[index].goods_number <= 1) {
+        return
+      }
+      this.cartArr[index].goods_number--
     },
-    // add (index) {
-    //   this.cartArr[index].goods_number++
-    // },
-    // insert (index) {
-    //   if (this.cartArr[index].goods_number <= 1) {
-    //     return
-    //   }
-    //   this.cartArr[index].goods_number--
-    // },
     removeCartShop (i) {
       console.log(1)
       this.cartArr.splice(i, 1)
-    },
-    ...mapActions(['updateGoodsNumber'])
+    }
   },
   computed: {
     totalPrice () { // 计算总价
