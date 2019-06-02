@@ -162,6 +162,15 @@ export default {
     removeCartShop (goodsid) {
       this.removeCartGoods(goodsid)
     },
+    forGoodsDetail (goodsId) {
+      // console.log(goodsId)
+      this.$router.push({
+        path: '/shopdetail',
+        query: {
+          goodsId: goodsId
+        }
+      })
+    },
     ...mapActions(['updateGoodsNumber', 'removeCartGoods'])
   },
   computed: {
