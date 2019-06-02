@@ -7,7 +7,8 @@ import {
   USER_INFO,
   RESET_USER_INFO,
   CART_SHOP_INFO,
-  CART_SHOP_UPDATE
+  CART_SHOP_UPDATE,
+  CART_SHOP_REMOVE
 } from './mutation-types'
 export default {
   [HOME_CSUAL] (state, { homecasual }) {
@@ -51,6 +52,7 @@ export default {
         hd_url: shopInfo.hd_url
       })
     }
+    localStorage.setItem('cartArr', JSON.stringify(state.cartArr)) // 商品加入购物车存入本地
   },
   [CART_SHOP_UPDATE] (state, { cartshopnumber }) {
     let type = cartshopnumber.index
@@ -61,6 +63,14 @@ export default {
       return
     }
     goods.goods_number += type
+    localStorage.setItem('cartArr', JSON.stringify(state.cartArr)) // 更新商品数量存入本地
     // console.log(goods.goods_id, goods.goods_number)
+  },
+  [CART_SHOP_REMOVE] (state, { goodsid }) {
+    // let newCatArr = state.cartArr.find(v => v.goods_id === goodsid)
+    let newCatArr = state.cartArr.filter(item => item.goods_id !== goodsid)
+    state.cartArr = newCatArr
+    // console.log(newCatArr)
+    localStorage.setItem('cartArr', JSON.stringify(state.cartArr)) // 删除商品之后存入本地
   }
 }

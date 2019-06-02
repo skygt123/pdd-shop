@@ -16,8 +16,8 @@ import {
   USER_INFO,
   RESET_USER_INFO,
   CART_SHOP_INFO,
-  // CART_SHOP_ADD,
-  CART_SHOP_UPDATE
+  CART_SHOP_UPDATE,
+  CART_SHOP_REMOVE
 } from './mutation-types'
 export default {
   // 首页轮播数据homecasual
@@ -57,7 +57,7 @@ export default {
   // 异步用户数据
   async getUserInfo ({ commit }, userInfo) {
     const result = await getUserInfo()
-    console.log(result)
+    // console.log(result)
     if (result.success_code === 200) {
       commit(USER_INFO, { userInfo: result.message })
       window.localStorage.setItem('loginType', 'true')
@@ -68,7 +68,7 @@ export default {
   // 退出登陆
   async logOut ({ commit }, userInfo) {
     const result = await getLogout()
-    console.log(result)
+    // console.log(result)
     if (result.success_code === 200) {
       commit(RESET_USER_INFO)
       window.localStorage.setItem('loginType', '')
@@ -76,18 +76,15 @@ export default {
   },
   // 添加数据到购物车
   addCartShop ({ commit }, cartInfo) {
-    console.log(cartInfo)
+    // console.log(cartInfo)
     commit(CART_SHOP_INFO, { cartInfo: cartInfo })
   },
-  // 添加数据增加
-  // cartShopAdd ({ commit }, cartInfo) {
-  //   // console.log(cartInfo)
-  //   commit(CART_SHOP_ADD, { cartInfo: cartInfo })
-  // },
-  // increment (context) {
-  //   context.commit('increment')
-  // },
   updateGoodsNumber ({ commit }, cartshopnumber) {
+    // 更新购物车商品
     commit(CART_SHOP_UPDATE, { cartshopnumber: cartshopnumber })
+  },
+  removeCartGoods ({ commit }, goodsid) {
+    // 删除购物车商品
+    commit(CART_SHOP_REMOVE, { goodsid: goodsid })
   }
 }

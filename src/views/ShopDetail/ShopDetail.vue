@@ -235,13 +235,17 @@ export default {
       }
     },
     addCart () {
-      // this.addCartShop() // 点击添加购物车
-      // this.$store.commit('tocart', '我是数据')
-      // this.addCartShop(this.goodInfo)
-      console.log(this.goodInfo)
       this.addCartShop({
         shopInfo: this.goodInfo,
         shopNum: this.shopNumber
+      }).then(() => {
+        const component = this.$refs.myPopup4
+        component.hide()
+        this.toast = this.$createToast({
+          txt: '商品已成功添加到购物车',
+          type: 'txt'
+        })
+        this.toast.show()
       })
     },
     ...mapActions({
